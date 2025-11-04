@@ -7,7 +7,7 @@ Twin Delayed Deep Deterministic Policy Gradient with Behavior Cloning (TD3BC) is
 This table lists some general features about TD3BC algorithm:
 
 
-| Features of MFQ   | Values | Description                                              |
+| Features of TD3BC | Values | Description                                              |
 | ------------------- | -------- | ---------------------------------------------------------- |
 | On-policy         | ❌     | The evaluate policy is the same as the target policy.    |
 | Off-policy        | ✅     | The evaluate policy is different from the target policy. |
@@ -38,10 +38,10 @@ When calculating the target value , the minimum of the two critics’ estimates 
 
 ## Key Idea Of TD3BC
 
-- **Policy Update Objective**:TD3’s policy $\pi$ is updated with the deterministic policy gradient([**DPG**](https://proceedings.mlr.press/v32/silver14.html)): $\pi = \argmax_{\pi} \mathbb{E}_{(s,a) \sim \mathcal{D}} \left[ Q(s, \pi(s)) \right]$, TD3+BC incorporates a behavior cloning term into the original policy as a regularization term. With a single hyperparameter $\lambda$ to control the strength of the regularizer.:
+- **Policy Update Objective**:TD3’s policy $\pi$ is updated with the deterministic policy gradient([**DPG**](https://proceedings.mlr.press/v32/silver14.html)):  $\pi=\operatorname*{argmax}_{\pi}\mathbb{E}_{s\sim D}\left[Q(s,\pi(s))\right]$, TD3+BC incorporates a behavior cloning term into the original policy as a regularization term. With a single hyperparameter $\lambda$ to control the strength of the regularizer:
 
 $$
-\pi = \argmax_{\pi} \mathbb{E}_{s \sim \mathcal{D}} \left[ Q(s, \pi(s)) \right] \rightarrow \pi = \argmax_{\pi} \mathbb{E}_{(s,a) \sim \mathcal{D}} \left[ \lambda \, Q(s, \pi(s)) - \left( \pi(s) - a \right)^2 \right]
+\pi=\operatorname*{argmax}_{\pi}\mathbb{E}_{s\sim D}\left[Q(s,\pi(s))\right]\rightarrow\pi=\operatorname*{argmax}_{\pi}\mathbb{E}_{(s,a)\sim D}\left[\lambda Q(s,\pi(s))-(\pi(s)-a)^2\right]
 $$
 
 - **State Processing**:TD3+BC performs normalization on states, standardizing them to have a mean of 0 and a standard deviation of 1, $s_{i}=\frac{s_{i}-\mu_{i}}{\sigma_{i}+\epsilon}$, where  $\epsilon$ is a small normalization constant. This helps improve the generalization ability and training stability of the network across different environments.

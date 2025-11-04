@@ -21,7 +21,7 @@ This table lists some general features about MFAC algorithm:
 The Nash equilibrium is a core concept in game theory, referring to a stable state where no participant can improve their own payoff by unilaterally changing their strategy. In stochastic games, the Nash equilibrium is described as follows:
 
 $$
-v^j(s; \mathbf{\pi}_{*}) = v^j(s; \pi_{*}^j, \mathbf{\pi}_{*}^{-j}) \geq v^j(s; \pi^j, \mathbf{\pi}_{*}^{-j})
+v^j(s;\mathbf{\pi}_*)=v^j(s;\pi_*^j,\mathbf{\pi}_*^{-j})\geq v^j(s;\pi^j,\mathbf{\pi}_*^{-j})
 $$
 
 Here,$s$ is the state,$\pi_*$ is all agents adopt the equilibrium strategy(where $\pi_*^{j}$ the equilibrium strategy of agent $j$ and $\pi_*^{-j}$ is the equilibrium strategy profile of all agents except ${j}$),$v^{j}(s,\pi_*)$ is the value of agent $j$. This formula can be understood as: No agent can increase its own value in the current state by unilaterally changing its strategy.
@@ -119,10 +119,10 @@ Actor is also called policy network, for each agent $j$, MFAC provides current p
 Under state $s$, agent $j$'s action $a^j=\pi_{\theta^{j}}(s)$, new mean action $\mathbf{\bar{a}}$ = $[\bar{a}^1, \dots, \bar{a}^N]$ and the calculation formula:
 
 $$
-\bar{a}^j = \frac{1}{N^j} \sum_k a^k, a^k \sim \pi_t^k(\cdot |s,{\bar{a}^k}_\_)
+\bar{a}^j=\frac{1}{N^j}\sum_ka^k,a^k\sim\pi_t^k(\cdot|s,\bar{a}_-^k)
 $$
 
-Here, agent $j’s$ $N_j$ neighbors from the policies $\pi^k_t$ parametrized by their previous mean actions ${\bar{a}^k}_\_$. Just like MFQ, store the experience tuple $(s, \mathbf{a}, \mathbf{r}, s', \mathbf{\bar{a}})$ in the experience replay buffer $\mathcal{D}$.
+Here, agent $j’s$ $N_j$ neighbors from the policies $\pi^k_t$ parametrized by their previous mean actions $\bar{a}_-^k$. Just like MFQ, store the experience tuple $(s, \mathbf{a}, \mathbf{r}, s', \mathbf{\bar{a}})$ in the experience replay buffer $\mathcal{D}$.
 
 Update the actor using the sampled policy gradient:
 
